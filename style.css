@@ -60,3 +60,7 @@
   background-color: rgb(9, 160, 55);
   backface-visibility: hidden;
 }
+.message {
+  color: rgb(131, 180, 57);
+  margin-bottom: 10px;
+}

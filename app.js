@@ -1,9 +1,11 @@
 let sec = 0;
 let min = 0;
+let score = 0;
 const minSpan = document.getElementById("min");
 const secSpan = document.getElementById("sec");
 const cards = document.querySelectorAll(".card");
 const frontSide = document.querySelectorAll(".front-side");
+const message = document.querySelector(".message");
 const colors = [
   "black",
   "blue",
@@ -17,6 +19,7 @@ const colors = [
   "pink",
 ];
 function timer () {
+  if(score === 5) return;
   sec = parseInt(sec);
   min = parseInt(min);
   sec += 1;
@@ -53,7 +56,7 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 let turnLock = false;
 function flipCard() {
-  if(turnLock) true;
+  if(turnLock) return;
   if (this === firstCard) return;
   this.classList.add("flip");
   if (!hasFlippedCard) {
@@ -65,6 +68,7 @@ function flipCard() {
     if (secondCard.style.backgroundColor === firstCard.style.backgroundColor) {
       firstCard.removeEventListener("click", flipCard);
       secondCard.removeEventListener("click", flipCard);
+      score ++;
     } else {
       setTimeout(() => {
         turnLock = true;
@@ -74,6 +78,9 @@ function flipCard() {
       }, 1000);
 
     }
+  }
+  if(score === 5){
+    message.textContent = "YOU WIN";
   }
 }
 cards.forEach((card) => card.addEventListener("click", flipCard));
